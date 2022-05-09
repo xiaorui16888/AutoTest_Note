@@ -1,0 +1,52 @@
+
+
+  ========= 测试开始 : 20220509_151817 =========
+
+
+
+>>> cases\
+
+[ suite setup ] cases\
+suite_setup
+打开浏览器
+
+-- 第 1 步 -- 打开浏览器 
+
+
+
+>>> cases\报告中插入截屏.py
+
+* 报告插入截图  -  2022-05-09 15:18:18
+
+  [ case execution steps ]
+图 imgs/20220509151822414382.png
+图 http://guoxiaorui.cn/usr/plugins/SimpleAdmin/static/img/suya.jpg
+  PASS 
+
+[ suite teardown ] cases\
+suite_teardown
+
+
+  ========= 测试结束 : 20220509_151824 =========
+
+
+  耗时    : 7.394 秒
+
+
+  预备执行用例数量 : 1
+
+  实际执行用例数量 : 1
+
+  通过 : 1
+
+  失败 : 0
+
+  异常 : 0
+
+  套件初始化失败 : 0
+
+  套件清除  失败 : 0
+
+  用例初始化失败 : 0
+
+  用例清除  失败 : 0

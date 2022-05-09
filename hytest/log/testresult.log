@@ -1,0 +1,224 @@
+
+
+  ========= 测试开始 : 20220509_022511 =========
+
+
+
+>>> cases\
+
+[ suite setup ] cases\
+总初始化
+
+
+>>> cases\功能1.py
+
+[ suite setup ] cases\功能1.py
+
+* 添加订单 - 00001  -  2022-05-09 02:25:11
+
+[ case setup ] 添加订单 - 00001
+添加订单
+
+  [ case execution steps ]
+
+-- 第 1 步 -- 再添加一个订单 
+
+
+** 检查点 **  检查API接口返回值 ---->  通过
+
+
+-- 第 2 步 -- 重命名订单 
+
+
+** 检查点 **  检查API接口返回值 ---->  通过
+
+
+-- 第 3 步 -- 修改订单数据 
+
+{'ret': 0}
+
+** 检查点 **  检查API接口返回值 ---->  !! 不通过!!
+
+  FAIL    
+Traceback:
+  File "cases\功能1.py", line 69, in teststeps
+    CHECK_POINT('检查API接口返回值', ret1 == {'ret': 1} )
+  File "d:\users\administrator\pycharmprojects\pythonautotest\venv\lib\site-packages\hytest\common.py", line 58, in CHECK_POINT
+    raise AssertionError()
+AssertionError
+
+
+[ case teardown ] 添加订单 - 00001
+删除订单
+
+* 添加订单 - 00002  -  2022-05-09 02:25:11
+
+  [ case execution steps ]
+
+-- 第 1 步 -- 添加一个客户不存在的订单 
+
+
+** 检查点 **  检查API接口返回值 ---->  通过
+
+
+-- 第 2 步 -- 添加一个客户id不存在的订单 
+
+
+** 检查点 **  检查API接口返回值 ---->  !! 不通过!!
+
+  FAIL    
+Traceback:
+  File "cases\功能1.py", line 83, in teststeps
+    CHECK_POINT('检查API接口返回值', ret['ret']==1 )
+  File "d:\users\administrator\pycharmprojects\pythonautotest\venv\lib\site-packages\hytest\common.py", line 58, in CHECK_POINT
+    raise AssertionError()
+AssertionError
+
+
+[ case teardown ] 添加订单 - 00002
+
+* Test_function_3  -  2022-05-09 02:25:11
+
+  [ case execution steps ]
+  PASS 
+
+[ case teardown ] Test_function_3
+
+* 登录 - 000031  -  2022-05-09 02:25:11
+
+[ case setup ] 登录 - 000031
+
+  [ case execution steps ]
+  PASS 
+
+[ case teardown ] 登录 - 000031
+
+* 登录 - 000032  -  2022-05-09 02:25:11
+
+[ case setup ] 登录 - 000032
+
+  [ case execution steps ]
+  PASS 
+
+[ case teardown ] 登录 - 000032
+
+* 登录 - 000033  -  2022-05-09 02:25:11
+
+[ case setup ] 登录 - 000033
+
+  [ case execution steps ]
+  FAIL   密码错误 
+Traceback:
+  File "cases\功能1.py", line 130, in teststeps
+    raise AssertionError(f'密码错误' )
+AssertionError: 密码错误
+
+
+[ case teardown ] 登录 - 000033
+
+[ suite teardown ] cases\功能1.py
+
+
+>>> cases\customer\
+
+[ suite setup ] cases\customer\
+
+
+>>> cases\customer\功能21.py
+
+[ suite setup ] cases\customer\功能21.py
+
+* 添加订单 - 00201  -  2022-05-09 02:25:11
+
+[ case setup ] 添加订单 - 00201
+
+  [ case execution steps ]
+  PASS 
+
+[ case teardown ] 添加订单 - 00201
+
+* 添加订单 - 00202  -  2022-05-09 02:25:11
+
+[ case_default setup ] 添加订单 - 00202
+
+  [ case execution steps ]
+  PASS 
+
+[ case teardown ] 添加订单 - 00202
+
+[ suite teardown ] cases\customer\功能21.py
+
+[ suite teardown ] cases\customer\
+suite teardown fail | NO ... 
+Traceback:
+  File "cases\customer\__st__.py", line 7, in suite_teardown
+    raise Exception('NO ...')
+Exception: NO ...
+
+
+
+>>> cases\order\
+
+
+>>> cases\order\功能31.py
+
+[ suite setup ] cases\order\功能31.py
+
+* 添加订单 - 00301  -  2022-05-09 02:25:11
+
+[ case setup ] 添加订单 - 00301
+
+  [ case execution steps ]
+  PASS 
+
+[ case teardown ] 添加订单 - 00301
+
+* 添加订单 - 00302  -  2022-05-09 02:25:11
+
+[ case_default setup ] 添加订单 - 00302
+
+  [ case execution steps ]
+  PASS 
+
+[ case teardown ] 添加订单 - 00302
+
+* 添加订单 - 00303  -  2022-05-09 02:25:11
+
+[ case_default setup ] 添加订单 - 00303
+
+  [ case execution steps ]
+  PASS 
+
+[ case_default teardown ] 添加订单 - 00303
+
+[ suite teardown ] cases\order\功能31.py
+
+[ suite teardown ] cases\order\
+
+[ suite teardown ] cases\
+总清除
+
+
+  ========= 测试结束 : 20220509_022511 =========
+
+
+  耗时    : 0.035 秒
+
+
+  预备执行用例数量 : 11
+
+  实际执行用例数量 : 11
+
+  通过 : 8
+
+  失败 : 3
+
+  异常 : 0
+
+  套件初始化失败 : 0
+
+  套件清除  失败 : 1
+
+  用例初始化失败 : 0
+
+  用例清除  失败 : 0

@@ -1,0 +1,2 @@
+[console_scripts]
+hytest = hytest.run:run
