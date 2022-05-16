@@ -1,0 +1,31 @@
+[ {
+  "uid" : "be23cd496a731b0c",
+  "name" : "test_03_edit_menu[caseInfo0]",
+  "time" : {
+    "start" : 1652338166735,
+    "stop" : 1652338166814,
+    "duration" : 79
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9a553af401241fb0",
+  "name" : "test_02_edit_flag[caseInfo0]",
+  "time" : {
+    "start" : 1652338166688,
+    "stop" : 1652338166735,
+    "duration" : 47
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "44c1cd33c1affe8",
+  "name" : "test_01_get_token[caseInfo0]",
+  "time" : {
+    "start" : 1652338166468,
+    "stop" : 1652338166688,
+    "duration" : 220
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]

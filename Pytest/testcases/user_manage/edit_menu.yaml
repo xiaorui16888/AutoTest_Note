@@ -1,0 +1,15 @@
+-
+  name: 编辑菜单的接口
+  request:
+    method: post
+    url: https://api.weixin.qq.com/cgi-bin/menu/create?access_token=
+    data: {
+      "button":[
+        {
+          "type":"view",
+          "name":"搜索",
+          "url":"https://www.baidu.com/"
+        }
+      ]
+    }
+    validate: None

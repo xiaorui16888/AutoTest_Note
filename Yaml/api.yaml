@@ -1,0 +1,15 @@
+-
+  name: 获取鉴权码接口
+  request:
+    url: https://api.weixin.qq.com/cgi-bin/token
+    method: get
+    headers:
+      Accept: '*/*'
+      Content-Type: 'application/json'
+    params:
+      grant_type: client_credential
+      appid: wxcf90023b26f51211
+      secret: 997b02c7551e854d7b6c69188d022098
+  assert:
+      eq:
+        expires_in: 7200

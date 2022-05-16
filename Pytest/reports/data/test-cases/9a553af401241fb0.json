@@ -1,0 +1,66 @@
+{
+  "uid" : "9a553af401241fb0",
+  "name" : "test_02_edit_flag[caseInfo0]",
+  "fullName" : "testcases.user_manage.test_user.TestUser#test_02_edit_flag",
+  "historyId" : "00fa6b3968188b8816057f46a603fe1d",
+  "time" : {
+    "start" : 1652338166688,
+    "stop" : 1652338166735,
+    "duration" : 47
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "tag",
+    "value" : "weixin"
+  }, {
+    "name" : "parentSuite",
+    "value" : "testcases.user_manage"
+  }, {
+    "name" : "suite",
+    "value" : "test_user"
+  }, {
+    "name" : "subSuite",
+    "value" : "TestUser"
+  }, {
+    "name" : "host",
+    "value" : "XTZJ-20211101WA"
+  }, {
+    "name" : "thread",
+    "value" : "6688-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "testcases.user_manage.test_user"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "caseInfo",
+    "value" : "{'name': '编辑标签的接口', 'request': {'method': 'post', 'url': 'https://api.weixin.qq.com/cgi-bin/guide/addguidetagoption?access_token=', 'data': {'tag_name': '测试tag1', 'tag_values': ['测试tag1-标签1', '测试tag1-标签2']}}, 'validate': 'None'}"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ "weixin" ]
+  },
+  "source" : "9a553af401241fb0.json",
+  "parameterValues" : [ "{'name': '编辑标签的接口', 'request': {'method': 'post', 'url': 'https://api.weixin.qq.com/cgi-bin/guide/addguidetagoption?access_token=', 'data': {'tag_name': '测试tag1', 'tag_values': ['测试tag1-标签1', '测试tag1-标签2']}}, 'validate': 'None'}" ]
+}

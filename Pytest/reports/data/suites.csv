@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Thu May 12 14:49:26 CST 2022","Thu May 12 14:49:26 CST 2022","79","testcases.user_manage","test_user","TestUser","","","test_03_edit_menu[caseInfo0]",""
+"passed","Thu May 12 14:49:26 CST 2022","Thu May 12 14:49:26 CST 2022","47","testcases.user_manage","test_user","TestUser","","","test_02_edit_flag[caseInfo0]",""
+"passed","Thu May 12 14:49:26 CST 2022","Thu May 12 14:49:26 CST 2022","220","testcases.user_manage","test_user","TestUser","","","test_01_get_token[caseInfo0]",""

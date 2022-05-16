@@ -1,0 +1,7 @@
+-
+  name: 编辑标签的接口
+  request:
+    method: post
+    url: https://api.weixin.qq.com/cgi-bin/guide/addguidetagoption?access_token=
+    data: {"tag_name":"测试tag1","tag_values":["测试tag1-标签1","测试tag1-标签2"]}
+  validate: None

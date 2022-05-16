@@ -1,0 +1,60 @@
+{
+  "uid" : "83edc06c07f9ae9e47eb6dd1b683e4e2",
+  "name" : "packages",
+  "children" : [ {
+    "name" : "testcases.user_manage.test_user",
+    "children" : [ {
+      "name" : "test_01_get_token[caseInfo0]",
+      "uid" : "44c1cd33c1affe8",
+      "parentUid" : "c9b958895abe674d0b4a84d410eb1dae",
+      "status" : "passed",
+      "time" : {
+        "start" : 1652338166468,
+        "stop" : 1652338166688,
+        "duration" : 220
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "newPassed" : false,
+      "newBroken" : false,
+      "retriesCount" : 0,
+      "retriesStatusChange" : false,
+      "parameters" : [ "{'name': '获取统一的接口鉴权码', 'request': {'method': 'get', 'url': 'https://api.weixin.qq.com/cgi-bin/token', 'data': {'grant_type': 'client_credential', 'appid': 'wxcf90023b26f51211', 'secret': '997b02c7551e854d7b6c69188d022098'}}, 'validate': 'None'}" ]
+    }, {
+      "name" : "test_02_edit_flag[caseInfo0]",
+      "uid" : "9a553af401241fb0",
+      "parentUid" : "c9b958895abe674d0b4a84d410eb1dae",
+      "status" : "passed",
+      "time" : {
+        "start" : 1652338166688,
+        "stop" : 1652338166735,
+        "duration" : 47
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "newPassed" : false,
+      "newBroken" : false,
+      "retriesCount" : 0,
+      "retriesStatusChange" : false,
+      "parameters" : [ "{'name': '编辑标签的接口', 'request': {'method': 'post', 'url': 'https://api.weixin.qq.com/cgi-bin/guide/addguidetagoption?access_token=', 'data': {'tag_name': '测试tag1', 'tag_values': ['测试tag1-标签1', '测试tag1-标签2']}}, 'validate': 'None'}" ]
+    }, {
+      "name" : "test_03_edit_menu[caseInfo0]",
+      "uid" : "be23cd496a731b0c",
+      "parentUid" : "c9b958895abe674d0b4a84d410eb1dae",
+      "status" : "passed",
+      "time" : {
+        "start" : 1652338166735,
+        "stop" : 1652338166814,
+        "duration" : 79
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "newPassed" : false,
+      "newBroken" : false,
+      "retriesCount" : 0,
+      "retriesStatusChange" : false,
+      "parameters" : [ "{'name': '编辑菜单的接口', 'request': {'method': 'post', 'url': 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=', 'data': {'button': [{'type': 'view', 'name': '搜索', 'url': 'https://www.baidu.com/'}]}, 'validate': 'None'}}" ]
+    } ],
+    "uid" : "testcases.user_manage.test_user"
+  } ]
+}
