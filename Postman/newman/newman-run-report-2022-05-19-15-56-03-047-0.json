@@ -1,0 +1,1434 @@
+{
+  "collection": {
+    "_": {
+      "postman_id": "7d6317f5-6bc3-4279-b24d-98b9246aa165"
+    },
+    "item": [
+      {
+        "id": "42b010ac-810b-4571-81ff-a44b41236659",
+        "name": "1.获取接口统一鉴权码token接口",
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "cgi-bin",
+              "token"
+            ],
+            "host": [
+              "api",
+              "weixin",
+              "qq",
+              "com"
+            ],
+            "query": [
+              {
+                "key": "grant_type",
+                "value": "client_credential"
+              },
+              {
+                "key": "appid",
+                "value": "wxcf90023b26f51211"
+              },
+              {
+                "key": "secret",
+                "value": "997b02c7551e854d7b6c69188d022098"
+              }
+            ],
+            "variable": []
+          },
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "b3f10183-5774-4e3f-81cf-c2161afd3f75",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"检查响应中是否含有access_token过期时间\", function () {\r",
+                "    var jsonData = pm.response.json();\r",
+                "    console.log(jsonData['access_token'])\r",
+                "    pm.environment.set(\"access_token\", jsonData['access_token']);\r",
+                "    pm.expect(jsonData['expires_in']).to.eql(7200);\r",
+                "});"
+              ],
+              "_lastExecutionId": "c1c03169-855f-4e5d-9c8f-1bc831b2c324"
+            }
+          }
+        ]
+      },
+      {
+        "id": "00edd034-8ebf-4aca-976e-63f80d8f8e15",
+        "name": "2.自定义菜单接口",
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "cgi-bin",
+              "menu",
+              "create"
+            ],
+            "host": [
+              "api",
+              "weixin",
+              "qq",
+              "com"
+            ],
+            "query": [
+              {
+                "key": "access_token",
+                "value": "{{access_token}}"
+              }
+            ],
+            "variable": []
+          },
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"button\": [\r\n        {\r\n            \"type\": \"view\",\r\n            \"name\": \"搜索\",\r\n            \"url\": \"http://www.soso.com/\"\r\n        }\r\n    ]\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "75085ada-610e-4c5d-99a4-ea3a44a2ca71",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"检查自定义菜单是否成功\", function () {\r",
+                "    pm.expect(pm.response.text()).to.include('{\"errcode\":0,\"errmsg\":\"ok\"}');\r",
+                "});"
+              ],
+              "_lastExecutionId": "46d918c1-14da-4756-a402-50c9d9ed8911"
+            }
+          }
+        ]
+      },
+      {
+        "id": "f41a8864-6879-479c-86d0-306de1d95332",
+        "name": "3.发送文本消息给指定用户接口",
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "cgi-bin",
+              "message",
+              "custom",
+              "send"
+            ],
+            "host": [
+              "api",
+              "weixin",
+              "qq",
+              "com"
+            ],
+            "query": [
+              {
+                "key": "access_token",
+                "value": "{{access_token}}"
+              }
+            ],
+            "variable": []
+          },
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"touser\":\"oMdQx562HYh_wq5KPq06UzwUWbRY\",\r\n    \"msgtype\":\"text\",\r\n    \"text\":\r\n    {\r\n         \"content\":\"Hello World{{$timestamp}}\"\r\n    }\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "03035eb4-5088-4692-9710-fae7fd2144e5",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Status code is 200\", function () {\r",
+                "    pm.response.to.have.status(200);\r",
+                "});"
+              ],
+              "_lastExecutionId": "5ab2efcf-b41a-4bc4-a9c0-f48ae9f3deca"
+            }
+          }
+        ]
+      },
+      {
+        "id": "c89e9dcd-d24f-4e54-93f4-20565a861a98",
+        "name": "4.新增永久素材",
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "cgi-bin",
+              "media",
+              "uploadimg"
+            ],
+            "host": [
+              "api",
+              "weixin",
+              "qq",
+              "com"
+            ],
+            "query": [
+              {
+                "key": "access_token",
+                "value": "{{access_token}}"
+              },
+              {
+                "key": "type",
+                "value": "image"
+              }
+            ],
+            "variable": []
+          },
+          "method": "POST",
+          "body": {
+            "mode": "formdata",
+            "formdata": [
+              {
+                "key": "media",
+                "type": "file",
+                "src": "/C:/Users/Administrator/Desktop/logo.png"
+              }
+            ]
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "ced598a2-e0dc-4801-95eb-b372696ab09b",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"检查素材是否上传成功\", function () {\r",
+                "        pm.expect(pm.response.text()).to.include(\"url\");\r",
+                "});"
+              ],
+              "_lastExecutionId": "c3ffdf7f-499d-424c-91ee-c26748037475"
+            }
+          }
+        ]
+      }
+    ],
+    "event": [],
+    "variable": [],
+    "info": {
+      "_postman_id": "7d6317f5-6bc3-4279-b24d-98b9246aa165",
+      "name": "微信公众号平台接口测试",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    }
+  },
+  "environment": {
+    "_": {
+      "postman_variable_scope": "environment",
+      "postman_exported_at": "2022-05-19T15:49:38.488Z",
+      "postman_exported_using": "Postman/9.18.2"
+    },
+    "id": "51b8390c-6780-48a1-a869-e9a15a26876a",
+    "name": "微信公众号平台环境",
+    "values": [
+      {
+        "type": "any",
+        "value": "57_lhA38cRiA6iXIrIbBtBa-4C0p4g1CZEoMrZ0Py7cJqD7kI0sOyoLdmw4XsTgi28ACBLL_OKmz67NFbeLzlYXDpdEXpvWE3DttLrIM3v7XEOoVUVLwHYZUwQWUZ4iHQPaog1OsQgterK4G_QwNTQdAAACIF",
+        "key": "access_token"
+      }
+    ]
+  },
+  "globals": {
+    "id": "6c41f03a-992c-418a-9c94-24b6b00d6f1f",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 0,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 333.5,
+      "responseMin": 221,
+      "responseMax": 434,
+      "responseSd": 81.04474073004367,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1652975761316,
+      "completed": 1652975762978
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 4,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "3978a01b-46b2-4466-bbd5-5fb5e5e490f7",
+          "httpRequestId": "bb2fba9d-d75a-4173-82e1-b664e527c658"
+        },
+        "item": {
+          "id": "42b010ac-810b-4571-81ff-a44b41236659",
+          "name": "1.获取接口统一鉴权码token接口",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "path": [
+                "cgi-bin",
+                "token"
+              ],
+              "host": [
+                "api",
+                "weixin",
+                "qq",
+                "com"
+              ],
+              "query": [
+                {
+                  "key": "grant_type",
+                  "value": "client_credential"
+                },
+                {
+                  "key": "appid",
+                  "value": "wxcf90023b26f51211"
+                },
+                {
+                  "key": "secret",
+                  "value": "997b02c7551e854d7b6c69188d022098"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "b3f10183-5774-4e3f-81cf-c2161afd3f75",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"检查响应中是否含有access_token过期时间\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    console.log(jsonData['access_token'])\r",
+                  "    pm.environment.set(\"access_token\", jsonData['access_token']);\r",
+                  "    pm.expect(jsonData['expires_in']).to.eql(7200);\r",
+                  "});"
+                ],
+                "_lastExecutionId": "c1c03169-855f-4e5d-9c8f-1bc831b2c324"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "cgi-bin",
+              "token"
+            ],
+            "host": [
+              "api",
+              "weixin",
+              "qq",
+              "com"
+            ],
+            "query": [
+              {
+                "key": "grant_type",
+                "value": "client_credential"
+              },
+              {
+                "key": "appid",
+                "value": "wxcf90023b26f51211"
+              },
+              {
+                "key": "secret",
+                "value": "997b02c7551e854d7b6c69188d022098"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.29.0",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "bb4a6c15-01bf-4f50-a4bd-271ef6ba8055",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "api.weixin.qq.com",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "bafe0dbc-3ad1-4175-9d05-d72de4cf8e0c",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; encoding=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Thu, 19 May 2022 15:56:02 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "194"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              97,
+              99,
+              99,
+              101,
+              115,
+              115,
+              95,
+              116,
+              111,
+              107,
+              101,
+              110,
+              34,
+              58,
+              34,
+              53,
+              55,
+              95,
+              108,
+              104,
+              65,
+              51,
+              56,
+              99,
+              82,
+              105,
+              65,
+              54,
+              105,
+              88,
+              73,
+              114,
+              73,
+              98,
+              66,
+              116,
+              66,
+              97,
+              45,
+              52,
+              67,
+              48,
+              112,
+              52,
+              103,
+              49,
+              67,
+              90,
+              69,
+              111,
+              77,
+              114,
+              90,
+              48,
+              80,
+              121,
+              55,
+              99,
+              74,
+              113,
+              68,
+              55,
+              107,
+              73,
+              48,
+              115,
+              79,
+              121,
+              111,
+              76,
+              100,
+              109,
+              119,
+              52,
+              88,
+              115,
+              84,
+              103,
+              105,
+              50,
+              56,
+              65,
+              67,
+              66,
+              76,
+              76,
+              95,
+              79,
+              75,
+              109,
+              122,
+              54,
+              55,
+              78,
+              70,
+              98,
+              101,
+              76,
+              122,
+              108,
+              89,
+              88,
+              68,
+              112,
+              100,
+              69,
+              88,
+              112,
+              118,
+              87,
+              69,
+              51,
+              68,
+              116,
+              116,
+              76,
+              114,
+              73,
+              77,
+              51,
+              118,
+              55,
+              88,
+              69,
+              79,
+              111,
+              86,
+              85,
+              86,
+              76,
+              119,
+              72,
+              89,
+              90,
+              85,
+              119,
+              81,
+              87,
+              85,
+              90,
+              52,
+              105,
+              72,
+              81,
+              80,
+              97,
+              111,
+              103,
+              49,
+              79,
+              115,
+              81,
+              103,
+              116,
+              101,
+              114,
+              75,
+              52,
+              71,
+              95,
+              81,
+              119,
+              78,
+              84,
+              81,
+              100,
+              65,
+              65,
+              65,
+              67,
+              73,
+              70,
+              34,
+              44,
+              34,
+              101,
+              120,
+              112,
+              105,
+              114,
+              101,
+              115,
+              95,
+              105,
+              110,
+              34,
+              58,
+              55,
+              50,
+              48,
+              48,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 298,
+          "responseSize": 194
+        },
+        "id": "42b010ac-810b-4571-81ff-a44b41236659",
+        "assertions": [
+          {
+            "assertion": "检查响应中是否含有access_token过期时间",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "8936ea41-11db-426d-b2ee-ab2cd45aaaf8",
+          "length": 4,
+          "cycles": 1,
+          "position": 1,
+          "iteration": 0,
+          "httpRequestId": "96d097a1-5fba-466e-bfb7-b3af5de53a6d"
+        },
+        "item": {
+          "id": "00edd034-8ebf-4aca-976e-63f80d8f8e15",
+          "name": "2.自定义菜单接口",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "path": [
+                "cgi-bin",
+                "menu",
+                "create"
+              ],
+              "host": [
+                "api",
+                "weixin",
+                "qq",
+                "com"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "{{access_token}}"
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"button\": [\r\n        {\r\n            \"type\": \"view\",\r\n            \"name\": \"搜索\",\r\n            \"url\": \"http://www.soso.com/\"\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "75085ada-610e-4c5d-99a4-ea3a44a2ca71",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"检查自定义菜单是否成功\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include('{\"errcode\":0,\"errmsg\":\"ok\"}');\r",
+                  "});"
+                ],
+                "_lastExecutionId": "46d918c1-14da-4756-a402-50c9d9ed8911"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "cgi-bin",
+              "menu",
+              "create"
+            ],
+            "host": [
+              "api",
+              "weixin",
+              "qq",
+              "com"
+            ],
+            "query": [
+              {
+                "key": "access_token",
+                "value": "57_lhA38cRiA6iXIrIbBtBa-4C0p4g1CZEoMrZ0Py7cJqD7kI0sOyoLdmw4XsTgi28ACBLL_OKmz67NFbeLzlYXDpdEXpvWE3DttLrIM3v7XEOoVUVLwHYZUwQWUZ4iHQPaog1OsQgterK4G_QwNTQdAAACIF"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "system": true
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.29.0",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "9f34d746-d3f0-449a-9232-53960de2f137",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "api.weixin.qq.com",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "153",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"button\": [\r\n        {\r\n            \"type\": \"view\",\r\n            \"name\": \"搜索\",\r\n            \"url\": \"http://www.soso.com/\"\r\n        }\r\n    ]\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "2e5c796c-2a74-404a-85e4-23c67c4b2aff",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; encoding=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Thu, 19 May 2022 15:56:03 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "27"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              99,
+              111,
+              100,
+              101,
+              34,
+              58,
+              48,
+              44,
+              34,
+              101,
+              114,
+              114,
+              109,
+              115,
+              103,
+              34,
+              58,
+              34,
+              111,
+              107,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 381,
+          "responseSize": 27
+        },
+        "id": "00edd034-8ebf-4aca-976e-63f80d8f8e15",
+        "assertions": [
+          {
+            "assertion": "检查自定义菜单是否成功",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "689e3b79-6fef-4960-b5fa-b91026b3fd72",
+          "length": 4,
+          "cycles": 1,
+          "position": 2,
+          "iteration": 0,
+          "httpRequestId": "2275dd4b-4fd7-4322-88d8-f37ae8513708"
+        },
+        "item": {
+          "id": "f41a8864-6879-479c-86d0-306de1d95332",
+          "name": "3.发送文本消息给指定用户接口",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "path": [
+                "cgi-bin",
+                "message",
+                "custom",
+                "send"
+              ],
+              "host": [
+                "api",
+                "weixin",
+                "qq",
+                "com"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "{{access_token}}"
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"touser\":\"oMdQx562HYh_wq5KPq06UzwUWbRY\",\r\n    \"msgtype\":\"text\",\r\n    \"text\":\r\n    {\r\n         \"content\":\"Hello World{{$timestamp}}\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "03035eb4-5088-4692-9710-fae7fd2144e5",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});"
+                ],
+                "_lastExecutionId": "5ab2efcf-b41a-4bc4-a9c0-f48ae9f3deca"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "cgi-bin",
+              "message",
+              "custom",
+              "send"
+            ],
+            "host": [
+              "api",
+              "weixin",
+              "qq",
+              "com"
+            ],
+            "query": [
+              {
+                "key": "access_token",
+                "value": "57_lhA38cRiA6iXIrIbBtBa-4C0p4g1CZEoMrZ0Py7cJqD7kI0sOyoLdmw4XsTgi28ACBLL_OKmz67NFbeLzlYXDpdEXpvWE3DttLrIM3v7XEOoVUVLwHYZUwQWUZ4iHQPaog1OsQgterK4G_QwNTQdAAACIF"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "system": true
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.29.0",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "f8de0a71-486e-43eb-a2e9-5f70e88c499a",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "api.weixin.qq.com",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "144",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"touser\":\"oMdQx562HYh_wq5KPq06UzwUWbRY\",\r\n    \"msgtype\":\"text\",\r\n    \"text\":\r\n    {\r\n         \"content\":\"Hello World1652975762\"\r\n    }\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "a62e3334-f51c-44ef-b348-aa1d648d95fd",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; encoding=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Thu, 19 May 2022 15:56:03 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "27"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              99,
+              111,
+              100,
+              101,
+              34,
+              58,
+              48,
+              44,
+              34,
+              101,
+              114,
+              114,
+              109,
+              115,
+              103,
+              34,
+              58,
+              34,
+              111,
+              107,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 221,
+          "responseSize": 27
+        },
+        "id": "f41a8864-6879-479c-86d0-306de1d95332",
+        "assertions": [
+          {
+            "assertion": "Status code is 200",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "049ab140-ed24-4d83-bd86-a04626cae712",
+          "length": 4,
+          "cycles": 1,
+          "position": 3,
+          "iteration": 0,
+          "httpRequestId": "93735854-0114-4b71-91e6-391f26f78bb0"
+        },
+        "item": {
+          "id": "c89e9dcd-d24f-4e54-93f4-20565a861a98",
+          "name": "4.新增永久素材",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "path": [
+                "cgi-bin",
+                "media",
+                "uploadimg"
+              ],
+              "host": [
+                "api",
+                "weixin",
+                "qq",
+                "com"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "{{access_token}}"
+                },
+                {
+                  "key": "type",
+                  "value": "image"
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "media",
+                  "type": "file",
+                  "src": "/C:/Users/Administrator/Desktop/logo.png"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ced598a2-e0dc-4801-95eb-b372696ab09b",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"检查素材是否上传成功\", function () {\r",
+                  "        pm.expect(pm.response.text()).to.include(\"url\");\r",
+                  "});"
+                ],
+                "_lastExecutionId": "c3ffdf7f-499d-424c-91ee-c26748037475"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "cgi-bin",
+              "media",
+              "uploadimg"
+            ],
+            "host": [
+              "api",
+              "weixin",
+              "qq",
+              "com"
+            ],
+            "query": [
+              {
+                "key": "access_token",
+                "value": "57_lhA38cRiA6iXIrIbBtBa-4C0p4g1CZEoMrZ0Py7cJqD7kI0sOyoLdmw4XsTgi28ACBLL_OKmz67NFbeLzlYXDpdEXpvWE3DttLrIM3v7XEOoVUVLwHYZUwQWUZ4iHQPaog1OsQgterK4G_QwNTQdAAACIF"
+              },
+              {
+                "key": "type",
+                "value": "image"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.29.0",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "995daa7d-eef5-4042-88ab-fc1c6bac24d5",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "api.weixin.qq.com",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "35418",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "formdata",
+            "formdata": [
+              {
+                "key": "media",
+                "type": "file",
+                "src": "/C:/Users/Administrator/Desktop/logo.png"
+              }
+            ]
+          }
+        },
+        "response": {
+          "id": "43ca53ca-718f-4ff4-999b-a84c0e35495a",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            },
+            {
+              "key": "Date",
+              "value": "Thu, 19 May 2022 15:56:03 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "135"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              117,
+              114,
+              108,
+              34,
+              58,
+              34,
+              104,
+              116,
+              116,
+              112,
+              58,
+              92,
+              47,
+              92,
+              47,
+              109,
+              109,
+              98,
+              105,
+              122,
+              46,
+              113,
+              112,
+              105,
+              99,
+              46,
+              99,
+              110,
+              92,
+              47,
+              109,
+              109,
+              98,
+              105,
+              122,
+              95,
+              112,
+              110,
+              103,
+              92,
+              47,
+              68,
+              67,
+              122,
+              56,
+              106,
+              107,
+              108,
+              65,
+              49,
+              53,
+              98,
+              80,
+              72,
+              84,
+              67,
+              118,
+              84,
+              104,
+              83,
+              86,
+              118,
+              117,
+              89,
+              65,
+              80,
+              71,
+              106,
+              79,
+              49,
+              89,
+              90,
+              85,
+              80,
+              118,
+              87,
+              69,
+              66,
+              71,
+              56,
+              107,
+              55,
+              106,
+              50,
+              74,
+              75,
+              98,
+              56,
+              80,
+              74,
+              74,
+              108,
+              67,
+              86,
+              104,
+              74,
+              106,
+              99,
+              79,
+              56,
+              49,
+              77,
+              84,
+              75,
+              109,
+              86,
+              77,
+              105,
+              97,
+              48,
+              106,
+              51,
+              97,
+              115,
+              66,
+              81,
+              99,
+              57,
+              120,
+              73,
+              81,
+              77,
+              66,
+              108,
+              72,
+              49,
+              72,
+              81,
+              92,
+              47,
+              48,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 434,
+          "responseSize": 135
+        },
+        "id": "c89e9dcd-d24f-4e54-93f4-20565a861a98",
+        "assertions": [
+          {
+            "assertion": "检查素材是否上传成功",
+            "skipped": false
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 383
+    },
+    "failures": [],
+    "error": null
+  }
+}

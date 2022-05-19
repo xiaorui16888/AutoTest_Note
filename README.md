@@ -6,3 +6,4 @@
 - emails：邮件发送
 - blogSys：博客系统部分自动化的实现
 - Yaml：yaml读写与pytest的结合使用
+- Postman：postman自动化接口测试-生成报告

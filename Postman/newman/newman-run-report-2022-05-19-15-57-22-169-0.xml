@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="微信公众号平台接口测试" tests="4" time="1.037">
+  <testsuite name="1.获取接口统一鉴权码token接口" id="566b176d-48d9-4943-aa29-8b408c1d430f" timestamp="2022-05-19T15:57:20.756Z" tests="1" failures="0" errors="0" time="0.246">
+    <testcase name="检查响应中是否含有access_token过期时间" time="0.246" classname=""/>
+  </testsuite>
+  <testsuite name="2.自定义菜单接口" id="98973f8c-e9ff-4269-8309-9d64d5b2c36b" timestamp="2022-05-19T15:57:20.756Z" tests="1" failures="0" errors="0" time="0.366">
+    <testcase name="检查自定义菜单是否成功" time="0.366" classname=""/>
+  </testsuite>
+  <testsuite name="3.发送文本消息给指定用户接口" id="0428dd75-f2bd-47aa-88ae-2ce33d3a80df" timestamp="2022-05-19T15:57:20.756Z" tests="1" failures="0" errors="0" time="0.219">
+    <testcase name="Status code is 200" time="0.219" classname=""/>
+  </testsuite>
+  <testsuite name="4.新增永久素材" id="b1feb903-7eb6-4345-8a7b-e8ebba9037b0" timestamp="2022-05-19T15:57:20.756Z" tests="1" failures="0" errors="0" time="0.206">
+    <testcase name="检查素材是否上传成功" time="0.206" classname=""/>
+  </testsuite>
+</testsuites>

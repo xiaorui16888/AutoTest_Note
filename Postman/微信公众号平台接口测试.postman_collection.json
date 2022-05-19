@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "7d6317f5-6bc3-4279-b24d-98b9246aa165",
+		"name": "微信公众号平台接口测试",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1.获取接口统一鉴权码token接口",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"检查响应中是否含有access_token过期时间\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    console.log(jsonData['access_token'])\r",
+							"    pm.environment.set(\"access_token\", jsonData['access_token']);\r",
+							"    pm.expect(jsonData['expires_in']).to.eql(7200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxcf90023b26f51211&secret=997b02c7551e854d7b6c69188d022098",
+					"protocol": "https",
+					"host": [
+						"api",
+						"weixin",
+						"qq",
+						"com"
+					],
+					"path": [
+						"cgi-bin",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "client_credential"
+						},
+						{
+							"key": "appid",
+							"value": "wxcf90023b26f51211"
+						},
+						{
+							"key": "secret",
+							"value": "997b02c7551e854d7b6c69188d022098"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.自定义菜单接口",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"检查自定义菜单是否成功\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('{\"errcode\":0,\"errmsg\":\"ok\"}');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"button\": [\r\n        {\r\n            \"type\": \"view\",\r\n            \"name\": \"搜索\",\r\n            \"url\": \"http://www.soso.com/\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.weixin.qq.com/cgi-bin/menu/create?access_token={{access_token}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"weixin",
+						"qq",
+						"com"
+					],
+					"path": [
+						"cgi-bin",
+						"menu",
+						"create"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.发送文本消息给指定用户接口",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"touser\":\"oMdQx562HYh_wq5KPq06UzwUWbRY\",\r\n    \"msgtype\":\"text\",\r\n    \"text\":\r\n    {\r\n         \"content\":\"Hello World{{$timestamp}}\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token={{access_token}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"weixin",
+						"qq",
+						"com"
+					],
+					"path": [
+						"cgi-bin",
+						"message",
+						"custom",
+						"send"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.新增永久素材",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"检查素材是否上传成功\", function () {\r",
+							"        pm.expect(pm.response.text()).to.include(\"url\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "media",
+							"type": "file",
+							"src": "/C:/Users/Administrator/Desktop/logo.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token={{access_token}}&type=image",
+					"protocol": "https",
+					"host": [
+						"api",
+						"weixin",
+						"qq",
+						"com"
+					],
+					"path": [
+						"cgi-bin",
+						"media",
+						"uploadimg"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}"
+						},
+						{
+							"key": "type",
+							"value": "image"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
